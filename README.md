@@ -11,3 +11,12 @@
 - ERD diagram with 5 database entities for the voting system
 
 ![ERD Diagram](./ERDdiagram.PNG)
+
+### MILESTONE 2:
+- MySQL database with 5 entities (Voters, Elections, Candidates, ElectionCandidates, Votes)
+- Complete DAO layer with CRUD operations for all entities
+- Database configuration using PDO with secure prepared statements
+- Base DAO class with common database operations
+- Entity-specific DAOs with custom voting business logic
+- SQL schema file for database creation and setup
+- Test file to verify all DAO functionality works correctly
