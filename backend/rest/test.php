@@ -22,8 +22,5 @@ $voterDao->insert([
 $voters = $voterDao->getAll();
 print_r($voters);
 
-$activeElections = $electionDao->getActiveElections();
-print_r($activeElections);
-
 
 ?>
