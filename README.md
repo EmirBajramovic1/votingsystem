@@ -20,3 +20,10 @@
 - Entity-specific DAOs with custom voting business logic
 - SQL schema file for database creation and setup
 - Test file to verify all DAO functionality works correctly
+
+### MILESTONE 3:
+- Complete service layer with BaseService and entity-specific services
+- Business logic with validation rules, password hashing, and vote integrity checks
+- FlightPHP REST API with CRUD operations and JSON responses
+- Organized route files for Voters, Elections, Candidates, and Votes
+- OpenAPI documentation with Swagger UI for interactive testing
