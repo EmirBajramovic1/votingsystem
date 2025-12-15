@@ -27,3 +27,11 @@
 - FlightPHP REST API with CRUD operations and JSON responses
 - Organized route files for Voters, Elections, Candidates, and Votes
 - OpenAPI documentation with Swagger UI for interactive testing
+
+### MILESTONE 4:
+- Implemented user authentication using FlightPHP middleware and JWT
+- Added role-based access control (Admin vs User)
+- Admins can perform full CRUD operations on elections and candidates
+- Regular users can vote and view election results
+- Frontend dynamically adapts based on authenticated user role
+- Fully connected and secured frontend–backend communication

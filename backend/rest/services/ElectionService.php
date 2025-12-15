@@ -27,5 +27,15 @@ class ElectionService extends BaseService {
         
         return $this->create($data);
     }
+
+    public function deleteElection($id) {
+        $candidateIds = $this->dao->getCandidateIdsByElection($id);
+
+        foreach ($candidateIds as $candidateId) {
+            Flight::candidateService()->deleteCandidate($candidateId);
+        }
+
+        return $this->delete($id);
+    }
 }
 ?>

@@ -19,5 +19,15 @@ class CandidateService extends BaseService {
         
         return $this->create($data);
     }
+
+    public function deleteCandidate($id) {
+        $voteService = new VoteService();
+        $electionCandidateService = new ElectionCandidateService();
+
+        $voteService->deleteByCandidate($id);
+        $electionCandidateService->deleteByCandidate($id);
+
+        return $this->delete($id);
+    }
 }
 ?>

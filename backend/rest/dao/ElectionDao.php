@@ -17,5 +17,23 @@ class ElectionDao extends BaseDao {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function deleteElectionCandidates($electionId) {
+        $stmt = $this->connection->prepare(
+            "DELETE FROM election_candidates WHERE election_id = :id"
+        );
+        $stmt->bindParam(':id', $electionId);
+        $stmt->execute();
+    }
+
+    public function getCandidateIdsByElection($electionId) {
+        $stmt = $this->connection->prepare("
+            SELECT candidate_id 
+            FROM election_candidates 
+            WHERE election_id = :id
+        ");
+        $stmt->execute(['id' => $electionId]);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
 }
 ?>

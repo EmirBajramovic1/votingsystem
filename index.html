@@ -29,10 +29,15 @@
             <a class="nav-link fs-5 mx-2 mx-lg-4 mb-3 mb-lg-0" href="#results">Results</a>
           </div>
 
-          <div class="navbar-nav flex-column flex-lg-row align-items-center gap-2">
-            <button class="btn btn-light fw-bold me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-            <button class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
-          </div>
+            <div id="navAuth" class="navbar-nav gap-2">
+                <button class="btn btn-light fw-bold" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                <button class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+            </div>
+
+            <div id="navUser" class="navbar-nav gap-3 align-items-center" style="display:none;">
+                <span id="navUsername" class="fw-bold"></span>
+                <button id="logoutBtn" class="btn btn-danger fw-bold">Logout</button>
+            </div>
         </div>
       </div>
     </div>
@@ -46,23 +51,25 @@
       </main>
     </section>
 
+    <div id="adminContainer"></div>
+
     <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
           <div class="modal-header">
             <h2 class="fw-bold">Login</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
           <div class="modal-body d-flex flex-column">
-            <label for="voterId" class="form-label">Voter ID</label>
-            <input type="text" class="form-control mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input id="loginEmail" type="text" class="form-control mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="text" class="form-control mb-3">
+            <input id="loginPassword" type="text" class="form-control mb-3">
           </div>
 
           <div class="modal-footer d-flex justify-content-center">
-            <button class="btn flex-row p-3 mb-3" style="background-color: royalblue; width: 500px;" data-bs-dismiss="modal">
+            <button id="loginBtn" class="btn flex-row p-3 mb-3" style="background-color: royalblue; width: 500px;" data-bs-dismiss="modal">
               <h4 class="fw-bold text-white" style="margin-bottom: 0;">Login</h4>
             </button>
             <p>Don't have an account?</p> <a class="text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Sign up</a>
@@ -76,25 +83,25 @@
         <div class="modal-content p-3">
           <div class="modal-header">
             <h2 class="fw-bold">Register</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
           <div class="modal-body d-flex flex-column">
             <label for="fName" class="form-label">First Name</label>
-            <input type="text" class="form-control mb-3">
+            <input id="regFirst" type="text" class="form-control mb-3">
 
             <label for="lName" class="form-label">Last Name</label>
-            <input type="text" class="form-control mb-3">
+            <input id="regLast" type="text" class="form-control mb-3">
 
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control mb-3">
+            <input id="regEmail" type="email" class="form-control mb-3">
             
             <label for="password" class="form-label">Password</label>
-            <input type="text" class="form-control mb-3">
+            <input id="regPassword" type="text" class="form-control mb-3">
           </div>
 
           <div class="modal-footer d-flex justify-content-center">
-            <button class="btn flex-row p-3 mb-3" style="background-color: royalblue; width: 500px;" data-bs-dismiss="modal">
+            <button id="registerBtn" class="btn flex-row p-3 mb-3" style="background-color: royalblue; width: 500px;" data-bs-dismiss="modal">
               <h4 class="fw-bold text-white" style="margin-bottom: 0;">Register</h4>
             </button>
             <p>Have an account?</p> <a class="text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Log in</a>  

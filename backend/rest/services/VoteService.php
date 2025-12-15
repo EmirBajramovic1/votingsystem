@@ -33,5 +33,9 @@ class VoteService extends BaseService {
     public function getVotesByElection($electionId) {
         return $this->dao->getVotesByElection($electionId);
     }
+
+    public function deleteByCandidate($candidateId) {
+        return $this->dao->deleteByCandidate($candidateId);
+    }
 }
 ?>

@@ -4,13 +4,15 @@
  *     path="/candidates",
  *     tags={"candidates"},
  *     summary="Get all candidates",
+ *     security={{"BearerAuth": {}}},
  *     @OA\Response(
- *         response=200,
+ *         response=200, 
  *         description="List of all candidates"
  *     )
  * )
  */
-Flight::route('GET /candidates', function(){
+Flight::route('GET /candidates', function () {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     Flight::json(Flight::candidateService()->getAll());
 });
 
@@ -18,44 +20,12 @@ Flight::route('GET /candidates', function(){
  * @OA\Get(
  *     path="/candidates/{id}",
  *     tags={"candidates"},
- *     summary="Get candidate by ID",
- *     @OA\Parameter(
- *         name="id",
- *         in="path",
- *         required=true,
- *         description="Candidate ID",
- *         @OA\Schema(type="integer", example=1)
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Candidate details"
- *     )
+ *     security={{"BearerAuth": {}}},
  * )
  */
 Flight::route('GET /candidates/@id', function($id){
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     Flight::json(Flight::candidateService()->getById($id));
-});
-
-/**
- * @OA\Get(
- *     path="/elections/{electionId}/candidates",
- *     tags={"candidates"},
- *     summary="Get candidates by election",
- *     @OA\Parameter(
- *         name="electionId",
- *         in="path",
- *         required=true,
- *         description="Election ID",
- *         @OA\Schema(type="integer", example=1)
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="List of candidates for the election"
- *     )
- * )
- */
-Flight::route('GET /elections/@electionId/candidates', function($electionId){
-    Flight::json(Flight::candidateService()->getCandidatesByElection($electionId));
 });
 
 /**
@@ -63,62 +33,39 @@ Flight::route('GET /elections/@electionId/candidates', function($electionId){
  *     path="/candidates",
  *     tags={"candidates"},
  *     summary="Create new candidate",
- *     @OA\RequestBody(
- *         required=true,
- *         @OA\JsonContent(
- *             required={"first_name", "last_name", "party"},
- *             @OA\Property(property="first_name", type="string", example="Kamala"),
- *             @OA\Property(property="last_name", type="string", example="Harris"),
- *             @OA\Property(property="party", type="string", example="Democratic Party")
- *         )
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Candidate created successfully"
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Candidate creation failed"
- *     )
+ *     security={{"BearerAuth": {}}},
  * )
  */
-Flight::route('POST /candidates', function(){
-    $data = Flight::request()->data->getData();
-    try {
-        $result = Flight::candidateService()->createCandidate($data);
-        Flight::json(['success' => true, 'message' => 'Candidate created successfully', 'data' => $result]);
-    } catch (Exception $e) {
-        Flight::json(['success' => false, 'message' => $e->getMessage()], 400);
-    }
+Flight::route('POST /candidates', function () {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+    Flight::json(
+        Flight::candidateService()->create(Flight::request()->data->getData())
+    );
 });
 
 /**
- * @OA\Post(
- *     path="/elections/{electionId}/candidates/{candidateId}",
+ * @OA\Delete(
+ *     path="/candidates/{id}",
  *     tags={"candidates"},
- *     summary="Add candidate to election",
+ *     summary="Delete candidate",
+ *     security={{"BearerAuth": {}}},
  *     @OA\Parameter(
- *         name="electionId",
+ *         name="id",
  *         in="path",
  *         required=true,
- *         description="Election ID",
- *         @OA\Schema(type="integer", example=1)
+ *         @OA\Schema(type="integer")
  *     ),
- *     @OA\Parameter(
- *         name="candidateId",
- *         in="path",
- *         required=true,
- *         description="Candidate ID",
- *         @OA\Schema(type="integer", example=1)
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Candidate added to election"
- *     )
+ *     @OA\Response(response=200, description="Candidate deleted")
  * )
  */
-Flight::route('POST /elections/@electionId/candidates/@candidateId', function($electionId, $candidateId){
-    $result = Flight::electionCandidateService()->addCandidateToElection($electionId, $candidateId);
-    Flight::json(['success' => $result, 'message' => $result ? 'Candidate added to election' : 'Failed to add candidate']);
+Flight::route('DELETE /candidates/@id', function ($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
+    Flight::candidateService()->deleteCandidate($id);
+
+    Flight::json([
+        "success" => true,
+        "message" => "Candidate deleted"
+    ]);
 });
 ?>
