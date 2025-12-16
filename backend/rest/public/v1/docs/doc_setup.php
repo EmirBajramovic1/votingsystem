@@ -8,20 +8,23 @@
  *     email="support@securevote.com",
  *     name="SecureVote Support"
  *   )
- * ),
+ * )
+ *
  * @OA\Server(
- *     url="http://localhost/securevote/backend/rest",
- *     description="API server"
- * ),
+ *     url="http://localhost/projects/votingsystem/backend/rest",
+ *     description="Local API server"
+ * )
+ *
  * @OA\Server(
  *     url="https://your-production-domain.com/backend/rest",
- *     description="API server"
- * ),
+ *     description="Production API server"
+ * )
+ *
  * @OA\SecurityScheme(
- *     securityScheme="ApiKey",
- *     type="apiKey",
- *     in="header",
- *     name="Authentication"
+ *     securityScheme="BearerAuth",
+ *     type="http",
+ *     bearerFormat="JWT",
+ *     scheme="bearer"
  * )
  */
 ?>

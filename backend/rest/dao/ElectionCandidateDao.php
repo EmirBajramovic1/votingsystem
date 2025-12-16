@@ -29,5 +29,12 @@ class ElectionCandidateDao extends BaseDao {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function deleteByCandidate($candidateId) {
+        $stmt = $this->connection->prepare(
+            "DELETE FROM election_candidates WHERE candidate_id = :id"
+        );
+        return $stmt->execute(['id' => $candidateId]);
+    }
 }
 ?>

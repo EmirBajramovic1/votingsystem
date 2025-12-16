@@ -40,5 +40,12 @@ class VoteDao extends BaseDao {
         $stmt->execute();
         return $stmt->fetch();
     }
+
+    public function deleteByCandidate($candidateId) {
+        $stmt = $this->connection->prepare(
+            "DELETE FROM votes WHERE candidate_id = :id"
+        );
+        return $stmt->execute(['id' => $candidateId]);
+    }
 }
 ?>

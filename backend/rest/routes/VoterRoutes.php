@@ -4,6 +4,7 @@
  *     path="/voters",
  *     tags={"voters"},
  *     summary="Get all voters",
+ *     security={{"BearerAuth": {}}},
  *     @OA\Response(
  *         response=200,
  *         description="List of all voters"
@@ -11,6 +12,7 @@
  * )
  */
 Flight::route('GET /voters', function(){
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json(Flight::voterService()->getAll());
 });
 
@@ -19,6 +21,7 @@ Flight::route('GET /voters', function(){
  *     path="/voters/{id}",
  *     tags={"voters"},
  *     summary="Get voter by ID",
+ *     security={{"BearerAuth": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -37,6 +40,7 @@ Flight::route('GET /voters', function(){
  * )
  */
 Flight::route('GET /voters/@id', function($id){
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json(Flight::voterService()->getById($id));
 });
 
@@ -87,6 +91,7 @@ Flight::route('POST /voters/register', function(){
  *     path="/voters/{id}/verify",
  *     tags={"voters"},
  *     summary="Verify voter",
+ *     security={{"BearerAuth": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -101,6 +106,7 @@ Flight::route('POST /voters/register', function(){
  * )
  */
 Flight::route('PUT /voters/@id/verify', function($id){
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $result = Flight::voterService()->verifyVoter($id);
     Flight::json(['success' => $result, 'message' => $result ? 'Voter verified' : 'Verification failed']);
 });
@@ -110,6 +116,7 @@ Flight::route('PUT /voters/@id/verify', function($id){
  *     path="/voters/email/{email}",
  *     tags={"voters"},
  *     summary="Get voter by email",
+ *     security={{"BearerAuth": {}}},
  *     @OA\Parameter(
  *         name="email",
  *         in="path",
@@ -128,6 +135,7 @@ Flight::route('PUT /voters/@id/verify', function($id){
  * )
  */
 Flight::route('GET /voters/email/@email', function($email){
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $voter = Flight::voterService()->getByEmail($email);
     if ($voter) {
         Flight::json($voter);

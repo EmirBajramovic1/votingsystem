@@ -24,5 +24,9 @@ class ElectionCandidateService extends BaseService {
     public function addVote($electionId, $candidateId) {
         return $this->dao->addVote($electionId, $candidateId);
     }
+
+    public function deleteByCandidate($candidateId) {
+        return $this->dao->deleteByCandidate($candidateId);
+    }
 }
 ?>
