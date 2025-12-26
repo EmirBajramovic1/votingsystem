@@ -7,7 +7,7 @@ function get_api_base_url() {
     if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
         return "http://localhost/projects/votingsystem/backend/rest";
     } else {
-        return "https://votingsystem-xxmci.ondigitalocean.app/backend/rest"; 
+        return "https://votingsystem-xxmci.ondigitalocean.app/"; 
     }
 }
 
