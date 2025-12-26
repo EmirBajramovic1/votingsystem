@@ -39,20 +39,18 @@ class Database {
 
     public static function connect() {
         if (self::$connection === null) {
-
             $dsn = "mysql:host=" . Config::DB_HOST() .
-                   ";port=" . Config::DB_PORT() .
-                   ";dbname=" . Config::DB_NAME() . ";charset=utf8mb4";
+                ";port=" . Config::DB_PORT() .
+                ";dbname=" . Config::DB_NAME() . ";charset=utf8mb4";
 
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             ];
 
             if (!Config::is_local()) {
-            $options[PDO::MYSQL_ATTR_SSL_CA] = true; 
-            $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
-        }
+                $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+            }
 
             self::$connection = new PDO(
                 $dsn,

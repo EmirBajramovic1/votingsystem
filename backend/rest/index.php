@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 header("Access-Control-Allow-Origin: https://votingsystemfrontend-i59en.ondigitalocean.app");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -10,8 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit;
 }
 
-require 'vendor/autoload.php';
-require_once 'config.php';
+try {
+    require 'vendor/autoload.php';
+    require_once 'config.php';
+    Database::connect();
+} catch (Exception $e) {
+    header('Content-Type: application/json');
+    echo json_encode(["success" => false, "error" => "DB Error: " . $e->getMessage()]);
+    exit;
+}
+
+//require 'vendor/autoload.php';
+//require_once 'config.php';
 
 require_once 'services/VoterService.php';
 require_once 'services/ElectionService.php';
