@@ -1,32 +1,36 @@
 <?php
 
 class Config {
+    public static function get_env($name, $default = "") {
+        return getenv($name) ?: $default;
+    }
+
     public static function is_local() {
         return in_array($_SERVER['SERVER_NAME'], ['localhost', '127.0.0.1']);
     }
 
     public static function DB_HOST() {
-        return self::is_local() ? "127.0.0.1" : "db-mysql-fra1-86197-do-user-30780613-0.h.db.ondigitalocean.com";
+        return self::is_local() ? "127.0.0.1" : self::get_env("DB_HOST");
     }
 
     public static function DB_NAME() {
-        return "securevote_db";
+        return self::is_local() ? "securevote_db" : self::get_env("DB_NAME");
     }
 
     public static function DB_USER() {
-        return self::is_local() ? "root" : "doadmin";
+        return self::is_local() ? "root" : self::get_env("DB_USER");
     }
 
     public static function DB_PASSWORD() {
-        return self::is_local() ? "" : "PASSWORD";
+        return self::is_local() ? "" : self::get_env("DB_PASSWORD");
     }
 
     public static function DB_PORT() {
-        return self::is_local() ? "3306" : "25060";
+        return self::is_local() ? "3306" : self::get_env("DB_PORT");
     }
 
     public static function JWT_SECRET() {
-        return "securevote_local_secret_2025";
+        return self::get_env("JWT_SECRET", "securevote_local_secret_2025");
     }
 }
 
@@ -36,20 +40,22 @@ class Database {
     public static function connect() {
         if (self::$connection === null) {
 
+            $dsn = "mysql:host=" . Config::DB_HOST() .
+                   ";port=" . Config::DB_PORT() .
+                   ";dbname=" . Config::DB_NAME() . ";charset=utf8mb4";
+
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             ];
 
             if (!Config::is_local()) {
                 $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+                $options[PDO::MYSQL_ATTR_SSL_CA] = null;
             }
 
             self::$connection = new PDO(
-                "mysql:host=" . Config::DB_HOST() .
-                ";port=" . Config::DB_PORT() .
-                ";dbname=" . Config::DB_NAME(),
+                $dsn,
                 Config::DB_USER(),
                 Config::DB_PASSWORD(),
                 $options
