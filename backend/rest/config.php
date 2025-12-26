@@ -50,9 +50,9 @@ class Database {
             ];
 
             if (!Config::is_local()) {
-                $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
-                $options[PDO::MYSQL_ATTR_SSL_CA] = null;
-            }
+            $options[PDO::MYSQL_ATTR_SSL_CA] = true; 
+            $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+        }
 
             self::$connection = new PDO(
                 $dsn,
