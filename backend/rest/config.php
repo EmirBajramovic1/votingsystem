@@ -18,7 +18,7 @@ class Config {
     }
 
     public static function DB_PASSWORD() {
-        return self::is_local() ? "" : "AVNS_Uxm68uKTSFOen8-bIf1";
+        return self::is_local() ? "" : "PASSWORD";
     }
 
     public static function DB_PORT() {
