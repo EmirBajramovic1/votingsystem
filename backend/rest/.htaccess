@@ -1,7 +1,6 @@
 SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
 RewriteEngine On
-RewriteBase /rest/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /rest/index.php [QSA,L]
+RewriteRule ^(.*)$ index.php [QSA,L]
