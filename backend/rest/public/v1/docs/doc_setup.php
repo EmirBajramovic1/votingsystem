@@ -1,30 +1,30 @@
 <?php
 /**
  * @OA\Info(
- *   title="SecureVote API",
- *   description="Online Voting System API",
- *   version="1.0.0",
- *   @OA\Contact(
- *     email="support@securevote.com",
- *     name="SecureVote Support"
- *   )
- * )
+ *      title="SecureVote API",
+ *      version="1.0.0",
+ *      description="Online Voting System API Documentation",
+ *      @OA\Contact(
+ *          email="support@securevote.com",
+ *          name="SecureVote Support"
+ *      )
+ * ),
  *
  * @OA\Server(
- *     url="http://localhost/projects/votingsystem/backend/rest",
- *     description="Local API server"
- * )
- *
+ *      url=LOCALSERVER,
+ *      description="Local Development Server"
+ * ),
  * @OA\Server(
- *     url="https://your-production-domain.com/backend/rest",
- *     description="Production API server"
- * )
+ *      url=PRODSERVER,
+ *      description="Production Server"
+ * ),
  *
  * @OA\SecurityScheme(
  *     securityScheme="BearerAuth",
  *     type="http",
+ *     scheme="bearer",
  *     bearerFormat="JWT",
- *     scheme="bearer"
+ *     description="Add 'Bearer {your_token}' to authorize requests"
  * )
  */
 ?>

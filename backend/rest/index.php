@@ -3,10 +3,6 @@
 require 'vendor/autoload.php';
 require_once 'config.php';
 
-Flight::map('db', function () {
-    return Database::connect();
-});
-
 require_once 'services/VoterService.php';
 require_once 'services/ElectionService.php';
 require_once 'services/CandidateService.php';
