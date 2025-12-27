@@ -35,3 +35,20 @@
 - Regular users can vote and view election results
 - Frontend dynamically adapts based on authenticated user role
 - Fully connected and secured frontend–backend communication
+
+### MILESTONE 5:
+- Implemented frontend MVC structure using Service-based architecture (only Services manage API calls and logic)
+- Added client-side form validation (required fields, email checks) and backend input validation for improved security
+- Enhanced authentication security with protected requests and validation before API calls
+- Deployed full application to DigitalOcean (frontend, backend, and database connected)
+- Configured live MySQL database and updated backend connection for production environment
+
+### Live Application Links
+- **Frontend:** https://votingsystemfrontend-i59en.ondigitalocean.app
+- **Backend API:** https://votingsystem-xxmci.ondigitalocean.app/
+- **API Documentation (Swagger):** https://votingsystem-xxmci.ondigitalocean.app/public/v1/docs/
+ 
+### Admin Login (for testing)
+| Email | Password |
+|--------|-----------|
+| admin@gmail.com | admin123 |
