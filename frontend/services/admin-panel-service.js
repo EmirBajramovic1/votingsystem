@@ -4,18 +4,31 @@ const AdminPanelService = {
         if ($("#adminPanel").length) return;
 
         $("#adminContainer").html(`
-            <div id="adminPanel" class="admin-only bg-light p-3 border rounded"
+            <div id="adminPanel" class="admin-only bg-light p-3 border rounded shadow"
             style="position:fixed;bottom:20px;right:20px;width:300px;z-index:9999">
-                <h5 class="fw-bold mb-3">Admin Panel</h5>
 
-                <button class="btn btn-primary w-100 mb-2" id="btnCreateElection">Create Election</button>
-                <button class="btn btn-primary w-100 mb-2" id="btnCreateCandidate">Create Candidate</button>
-                <button class="btn btn-primary w-100" id="btnAssignCandidate">Assign Candidate</button>
-                <hr>
-                <button class="btn btn-danger w-100 mb-2" id="btnDeleteElection">Delete Election</button>
-                <button class="btn btn-danger w-100" id="btnDeleteCandidate">Delete Candidate</button>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="fw-bold mb-0">Admin Panel</h5>
+                    <button id="togglePanel" class="btn btn-sm btn-outline-gray shadow">–</button>
+                </div>
+
+                <div id="adminPanelContent">
+                    <button class="btn btn-primary w-100 mb-2" id="btnCreateElection">Create Election</button>
+                    <button class="btn btn-primary w-100 mb-2" id="btnCreateCandidate">Create Candidate</button>
+                    <button class="btn btn-primary w-100" id="btnAssignCandidate">Assign Candidate</button>
+                    <hr>
+                    <button class="btn btn-danger w-100 mb-2" id="btnDeleteElection">Delete Election</button>
+                    <button class="btn btn-danger w-100" id="btnDeleteCandidate">Delete Candidate</button>
+                </div>
             </div>
         `);
+
+        $("#togglePanel").click(() => {
+            $("#adminPanelContent").toggle();
+            $("#togglePanel").text(
+                $("#adminPanelContent").is(":visible") ? "–" : "+"
+            );
+        });
 
         $("#btnCreateElection").click(() => this.createElection());
         $("#btnCreateCandidate").click(() => this.createCandidate());

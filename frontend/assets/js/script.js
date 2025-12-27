@@ -56,5 +56,11 @@ const Script = {
 $(document).ready(() => {
     Script.updateNavbar();
     AuthService.init();
+
+    const user = AuthService.getUser();
+    if (user && user.role === "admin") {
+        AdminPanelService.renderPanel();
+    }
+    
     $("#logoutBtn").on("click", AuthService.logout);
 });
