@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./assets/css/spapp.css">
   </head>
   <body>
@@ -61,15 +60,16 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
-          <div class="modal-body d-flex flex-column">
-            <label for="email" class="form-label">Email</label>
-            <input id="loginEmail" type="text" class="form-control mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input id="loginPassword" type="text" class="form-control mb-3">
-          </div>
+          <form id="loginForm" class="modal-body d-flex flex-column">
+            <label for="loginEmail" class="form-label">Email</label>
+            <input id="loginEmail" name="email" type="email" class="form-control mb-3">
+
+            <label for="loginPassword" class="form-label">Password</label>
+            <input id="loginPassword" name="password" type="password" class="form-control mb-3">
+          </form>
 
           <div class="modal-footer d-flex justify-content-center">
-            <button id="loginBtn" class="btn flex-row p-3 mb-3" style="background-color: royalblue; width: 500px;" data-bs-dismiss="modal">
+            <button id="loginBtn" type="submit" form="loginForm" class="btn flex-row p-3 mb-3" style="background-color: royalblue; width: 500px;">
               <h4 class="fw-bold text-white" style="margin-bottom: 0;">Login</h4>
             </button>
             <p>Don't have an account?</p> <a class="text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Sign up</a>
@@ -86,22 +86,22 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
-          <div class="modal-body d-flex flex-column">
-            <label for="fName" class="form-label">First Name</label>
-            <input id="regFirst" type="text" class="form-control mb-3">
+          <form id="registerForm" class="modal-body d-flex flex-column">
+            <label for="regFirst" class="form-label">First Name</label>
+            <input id="regFirst" name="first_name" type="text" class="form-control mb-3">
 
-            <label for="lName" class="form-label">Last Name</label>
-            <input id="regLast" type="text" class="form-control mb-3">
+            <label for="regLast" class="form-label">Last Name</label>
+            <input id="regLast" name="last_name" type="text" class="form-control mb-3">
 
-            <label for="email" class="form-label">Email</label>
-            <input id="regEmail" type="email" class="form-control mb-3">
+            <label for="regEmail" class="form-label">Email</label>
+            <input id="regEmail" name="email" type="email" class="form-control mb-3">
             
-            <label for="password" class="form-label">Password</label>
-            <input id="regPassword" type="text" class="form-control mb-3">
-          </div>
+            <label for="regPassword" class="form-label">Password</label>
+            <input id="regPassword" name="password" type="password" class="form-control mb-3">
+          </form>
 
           <div class="modal-footer d-flex justify-content-center">
-            <button id="registerBtn" class="btn flex-row p-3 mb-3" style="background-color: royalblue; width: 500px;" data-bs-dismiss="modal">
+            <button id="registerBtn" type="submit" form="registerForm" class="btn flex-row p-3 mb-3" style="background-color: royalblue; width: 500px;">
               <h4 class="fw-bold text-white" style="margin-bottom: 0;">Register</h4>
             </button>
             <p>Have an account?</p> <a class="text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Log in</a>  
@@ -113,6 +113,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.spapp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    <script src="services/auth-service.js"></script>
+    <script src="services/vote-service.js"></script>
+    <script src="services/result-service.js"></script>
+    <script src="services/admin-panel-service.js"></script>
+
     <script src="assets/js/script.js"></script>
   </body>
 </html>
